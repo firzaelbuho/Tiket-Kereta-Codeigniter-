@@ -21,27 +21,27 @@
             <a href="<?php echo base_url(); ?>customer/pilih_kereta/<?= $u->id_kereta; ?>">
                 <div class="text-white bg-primary p-3">
                     <br>
-                    <h4> KA <?php echo $u->nama_kereta . " (" . $u->id_kereta . ")" ?></h4>
+                    <h4> KA <?php echo $u->id_kereta . " (" . $u->id_kereta . ")" ?></h4>
 
                     <br>
-                    <h5><?= $u->kelas ?></h5>
+                    <h5><?= $u->id_kereta ?></h5>
                     <br>
                     <table cellpadding="5px" class="p-2 text-white text-center">
                         <tr>
-                            <td><?= $u->berangkat . " (" . $u->kd_berangkat . ")" ?></td>
+                            <td><?= $u->id_kereta . " (" . $u->id_kereta . ")" ?></td>
                             <td>--></td>
-                            <td><?= $u->tujuan . " (" . $u->kd_tujuan . ")" ?></td>
+                            <td><?= $u->id_kereta . " (" . $u->id_kereta . ")" ?></td>
                         </tr>
 
                         </tr>
                         <tr>
-                            <td><?= $u->waktu_berangkat ?></td>
+                            <td><?= $u->id_kereta ?></td>
                             <td>--></td>
-                            <td><?= $u->waktu_tujuan ?></td>
+                            <td><?= $u->id_kereta ?></td>
                         </tr>
                     </table>
                     <br>
-                    <h5> Rp. <?php echo $u->tarif ?> </h5>
+                    <h5> Rp. <?php echo $u->id_kereta ?> </h5>
                     <br>
 
                     <br>

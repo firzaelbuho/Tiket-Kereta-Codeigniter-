@@ -63,7 +63,8 @@ class customer extends CI_Controller
 
         $i = 0;
         foreach ($cek as $u) {
-            $temp_kereta[$i++] = $u->id_kereta;
+            $temp_kereta[$i] = $u->id_kereta;
+            $i++;
         }
 
         //cek yg melewati stasiun tujuan 
@@ -102,69 +103,21 @@ class customer extends CI_Controller
         //output pilihan kereta
 
 
-        // $this->db->select('*');
-        // $this->db->from('kereta');
-        // for ($i = 0; $i < count($kereta); $i++) {
-        //     $this->db->or_where('id_kereta ', $kereta[$i]);
-        // }
-
-        // $hasil_kereta =  $this->db->get()->result();
+        $this->db->select('*');
+        $this->db->from('jadwal');
         for ($i = 0; $i < count($kereta); $i++) {
-
-            $hasil_kereta = $this->model_customer->tampil3("kereta", array(
-                'id_kereta' => $kereta[$i],
-
-            ))->row();
-
-            $hasil_berangkat = $this->model_customer->tampil4("pemberhentian", array(
-                'id_kereta' => $kereta[$i],
-                'pemberhentian.no_stasiun' => $berangkat,
-                //'no_stasiun' => $berangkat,
-
-            ))->row();
-
-            $hasil_tujuan = $this->model_customer->tampil4("pemberhentian", array(
-                'id_kereta' => $kereta[$i],
-                'pemberhentian.no_stasiun' => $tujuan,
-                //'no_stasiun' => $tujuan,
-
-            ))->row();
-
-
-            //input ke tabel temp
-
-            $dataInput = array(
-                'id_kereta' => $hasil_kereta->id_kereta,
-                'berangkat' => $hasil_berangkat->nama_stasiun,
-                'tujuan' => $hasil_tujuan->nama_stasiun,
-                'waktu_berangkat' => $hasil_berangkat->waktu,
-                'waktu_tujuan' => $hasil_tujuan->waktu,
-                'nama_kereta' => $hasil_kereta->nama_kereta,
-                'tarif' => $hasil_kereta->tarif,
-                'kelas' => $hasil_kereta->kelas,
-                'kd_berangkat' => $hasil_berangkat->kd_stasiun,
-                'kd_tujuan' => $hasil_tujuan->kd_stasiun,
-            );
-
-
-
-
-
-            $this->model_customer->input_temp('temp', $dataInput);
+            $this->db->or_where('id_kereta ', $kereta[$i]);
         }
 
+        $hasil_kereta['data'] =  $this->db->get()->result();
 
-
-
-
-
+        //cek jadwal
 
         //dapatkan data dari temp
-        $hasil_temp['data'] =  $this->model_customer->tampil('temp')->result();
-        $this->model_customer->hapus_data('temp');
 
 
-        $this->load->view('pilih_kereta', $hasil_temp);
+
+        $this->load->view('pilih_kereta', $hasil_kereta);
     }
 
 
