@@ -103,18 +103,24 @@ class customer extends CI_Controller
         //output pilihan kereta
 
 
-        $this->db->select('*');
-        $this->db->from('jadwal');
-        for ($i = 0; $i < count($kereta); $i++) {
-            $this->db->or_where('id_kereta ', $kereta[$i]);
-        }
+        $hasil_kereta['data'] =   $this->model_customer->tampilJadwal($kereta);
+        $hasil_berangkat =  $this->model_customer->tampilPemberhentian($kereta, $berangkat);
+        $hasil_tujuan =  $this->model_customer->tampilPemberhentian($kereta, $tujuan);
 
-        $hasil_kereta['data'] =  $this->db->get()->result();
+        for ($i = 0; $i < count($hasil_kereta['data']); $i++) {
+            $hasil_kereta['data'][$i]->stasiun_berangkat = $hasil_berangkat[$i]->nama_stasiun;
+            $hasil_kereta['data'][$i]->waktu_berangkat = $hasil_berangkat[$i]->waktu;
+            $hasil_kereta['data'][$i]->kd_stasiun_berangkat = $hasil_berangkat[$i]->kd_stasiun;
+            $hasil_kereta['data'][$i]->stasiun_tujuan = $hasil_tujuan[$i]->nama_stasiun;
+            $hasil_kereta['data'][$i]->waktu_tujuan = $hasil_tujuan[$i]->waktu;
+            $hasil_kereta['data'][$i]->kd_stasiun_tujuan = $hasil_tujuan[$i]->kd_stasiun;
+        }
 
         //cek jadwal
 
         //dapatkan data dari temp
-
+        // var_dump($hasil_berangkat);
+        //var_dump($hasil_kereta);
 
 
         $this->load->view('pilih_kereta', $hasil_kereta);
@@ -131,11 +137,13 @@ class customer extends CI_Controller
         // echo 'aaa';
         // echo $id_kereta;
 
-        $cek = $this->model_customer->tampil3("kereta", array(
-            'id_kereta' => $id_kereta,
+        $cek = $this->model_customer->tampil3("jadwal", array(
+            'id_jadwal' => $id_kereta,
 
         ))->result();
 
         var_dump($cek);
+
+        $this->load->view('beli_tiket');
     }
 }

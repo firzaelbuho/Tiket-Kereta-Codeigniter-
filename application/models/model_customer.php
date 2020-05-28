@@ -34,6 +34,41 @@ class Model_customer extends CI_Model
         $this->db->empty_table($table);
     }
 
+    function tampilJadwal($kereta)
+    {
+        $this->db->select('*');
+        $this->db->from('jadwal');
+        $this->db->join('kereta', 'jadwal.id_kereta=kereta.id_kereta');
+
+        for ($i = 0; $i < count($kereta); $i++) {
+            $this->db->or_where('jadwal.id_kereta ', $kereta[$i]);
+        }
+
+        return  $this->db->get()->result();
+    }
+
+    function tampilPemberhentian($kereta, $id_stasiun)
+    {
+
+        $i = 0;
+        $query = '(jadwal.id_kereta=' . $kereta[0];
+        for ($i = 1; $i < count($kereta); $i++) {
+            $query = $query . ' OR jadwal.id_kereta=' . $kereta[$i];
+        }
+        $query = $query . ')';
+
+        $this->db->select('stasiun.nama_stasiun ,pemberhentian.waktu,stasiun.kd_stasiun');
+        $this->db->from('jadwal');
+        $this->db->join('pemberhentian', 'pemberhentian.id_kereta=jadwal.id_kereta');
+        $this->db->join('stasiun', 'stasiun.no_stasiun=pemberhentian.no_stasiun');
+        $this->db->where('stasiun.no_stasiun ', $id_stasiun);
+
+        $this->db->where($query);
+
+
+
+        return  $this->db->get()->result();
+    }
 
 
 
