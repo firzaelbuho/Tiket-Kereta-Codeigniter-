@@ -52,51 +52,83 @@
                     for ($i = 0; $i < count($data); $i++) {
                     ?>
                         <div style="width:70%" class="row text-center">
+                            <?php
+                            if ($data[$i]->status == 'kosong') { ?>
+                                <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                <?php
+                            } else if ($data[$i]->status == 'penuh') { ?>
+                                    <div class="m-1 p-1 col-lg-1 bg-danger text-white">
+                                    <?php } else { ?>
+                                        <div class="m-1 p-1 col-lg-1 bg-warning text-white">
+                                        <?php } ?>
 
-                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                        <?= $data[$i]->no_kursi ?>
 
-                                <?= $data[$i]->no_kursi ?>
-
-                            </div>
-
-
-                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-
-                                <?= $data[$i + 20]->no_kursi ?>
-
-                            </div>
-
-                            <div class="col-1"></div>
+                                        </div>
 
 
-                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                        <?php
 
-                                <?= $data[$i + 40]->no_kursi ?>
+                                        if ($data[$i]->status == 'kosong') { ?>
+                                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                            <?php
+                                        } else if ($data[$i]->status == 'penuh') { ?>
+                                                <div class="m-1 p-1 col-lg-1 bg-danger text-white">
+                                                <?php } else { ?>
+                                                    <div class="m-1 p-1 col-lg-1 bg-warning text-white">
+                                                    <?php } ?>
 
-                            </div>
+                                                    <?= $data[$i + 20]->no_kursi ?>
 
+                                                    </div>
 
-                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-
-                                <?= $data[$i + 60]->no_kursi ?>
-
-                            </div>
-
-                        </div>
-
-
-
-
+                                                    <div class="col-1"></div>
 
 
-                    <?php
-                    } ?>
+                                                    <?php
+                                                    if ($data[$i]->status == 'kosong') { ?>
+                                                        <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                                        <?php
+                                                    } else if ($data[$i]->status == 'penuh') { ?>
+                                                            <div class="m-1 p-1 col-lg-1 bg-danger text-white">
+                                                            <?php } else { ?>
+                                                                <div class="m-1 p-1 col-lg-1 bg-warning text-white">
+                                                                <?php } ?>
+
+                                                                <?= $data[$i + 40]->no_kursi ?>
+
+                                                                </div>
 
 
-                </div>
-                <br>
+                                                                <?php
+                                                                if ($data[$i]->status == 'kosong') { ?>
+                                                                    <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+                                                                    <?php
+                                                                } else if ($data[$i]->status == 'penuh') { ?>
+                                                                        <div class="m-1 p-1 col-lg-1 bg-danger text-white">
+                                                                        <?php } else { ?>
+                                                                            <div class="m-1 p-1 col-lg-1 bg-warning text-white">
+                                                                            <?php } ?>
 
-                <button type="submit" class="btn btn-primary">Pesan Tiket</button>
+                                                                            <?= $data[$i + 60]->no_kursi ?>
+
+                                                                            </div>
+
+                                                                        </div>
+
+
+
+
+
+
+                                                                    <?php
+                                                                } ?>
+
+
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <button type="submit" class="btn btn-primary">Pesan Tiket</button>
 
 
 
@@ -105,6 +137,7 @@
     </div>
 
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="<?= base_url(); ?>assets/js/tiket.js"></script>
 
 </body>
 

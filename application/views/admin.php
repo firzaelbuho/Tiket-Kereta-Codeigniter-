@@ -1,24 +1,31 @@
 <html>
 
 <head>
-    <title>Membuat login dengan codeigniter | www.malasngoding.com</title>
+    <title>Dashboard - Admin</title>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h1>Login berhasil !</h1>
-    <h2>Hai, <?php echo $this->session->userdata("nama"); ?></h2>
+    <br><br><br>
+    <div class="container centered">
 
-    <h1>CRUD</h1>
-    <br>
-    <ul>
-        <li a href="<?php echo base_url('admin/create'); ?>">CREATE</li>
-        <li a href="<?php echo base_url('admin/create'); ?>">CREATE</li>
-        <li a href="<?php echo base_url('admin/create'); ?>">CREATE</li>
-        <li a href="<?php echo base_url('admin/create'); ?>">CREATE</li>
-    </ul>
+        <div class="row ">
+            <div class="col-2"></div>
+            <div class="col-4 bg-primary m-1">
+                <a class="text-decoration-none btn text-light" href="<?php echo base_url('admin/Laporan'); ?>">Laporan</a>
+            </div>
+            <div class="col-4 bg-primary m-1">
+                <a class="text-decoration-none btn text-light" href="<?php echo base_url('admin/Penjadwalan'); ?>">Penjadwalan</a>
+            </div>
 
-    <a href="<?php echo base_url('login/logout'); ?>">Logout</a>
+
+        </div>
+
+    </div>
+
+
+
+
 </body>
 
 </html>
