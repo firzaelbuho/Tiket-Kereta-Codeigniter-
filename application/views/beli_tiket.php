@@ -31,7 +31,67 @@
                 <br>
                 <h3>Pilih Tempat Duduk</h3>
                 <br>
+                <p>
+                    Gerbong
+                    <select name="gerbong" id="gerbong">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                    No. Kursi <input size="2" disabled type="text">
+                </p>
                 <div id="pilihKursi">
+
+                    <?php
+                    //var_dump($data);
+                    for ($i = 0; $i < count($data); $i++) {
+                    ?>
+                        <div style="width:70%" class="row text-center">
+
+                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+
+                                <?= $data[$i]->no_kursi ?>
+
+                            </div>
+
+
+                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+
+                                <?= $data[$i + 20]->no_kursi ?>
+
+                            </div>
+
+                            <div class="col-1"></div>
+
+
+                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+
+                                <?= $data[$i + 40]->no_kursi ?>
+
+                            </div>
+
+
+                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
+
+                                <?= $data[$i + 60]->no_kursi ?>
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                    <?php
+                    } ?>
+
 
                 </div>
                 <br>
@@ -43,6 +103,8 @@
             </form>
         </div>
     </div>
+
+    <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-3.5.1.js"></script>
 
 </body>
 

@@ -71,7 +71,14 @@ class Model_customer extends CI_Model
     }
 
 
-
+    function tampilKursi($id_jadwal, $gerbong)
+    {
+        $this->db->select('*');
+        $this->db->from('kursi');
+        $this->db->where('id_jadwal', $id_jadwal);
+        $this->db->where('no_gerbong', $gerbong);
+        return  $this->db->get()->result();
+    }
 
     function input_temp($table, $data)
 

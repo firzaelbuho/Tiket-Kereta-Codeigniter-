@@ -133,17 +133,14 @@ class customer extends CI_Controller
     //fungsi pilih kereta
     function pilih_kereta()
     {
-        $id_kereta = $this->uri->segment('3');
+        $id_jadwal = $this->uri->segment('3');
         // echo 'aaa';
         // echo $id_kereta;
 
-        $cek = $this->model_customer->tampil3("jadwal", array(
-            'id_jadwal' => $id_kereta,
+        $kursi['data'] = $this->model_customer->tampilKursi($id_jadwal, 1);
 
-        ))->result();
+        // var_dump($cek);
 
-        var_dump($cek);
-
-        $this->load->view('beli_tiket');
+        $this->load->view('beli_tiket', $kursi);
     }
 }
