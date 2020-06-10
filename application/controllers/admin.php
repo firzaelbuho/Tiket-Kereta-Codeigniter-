@@ -51,6 +51,8 @@ class Admin extends CI_Controller
         //var_dump($data);
         $this->load->view('laporan_trx', $data);
     }
+
+
     function penjadwalan()
     {
         $d = $this->model_admin->tampil_jadwal();
@@ -135,5 +137,246 @@ class Admin extends CI_Controller
 
         print_r('berhasil menghapus');
         $this->penjadwalan();
+    }
+
+    function kereta()
+    {
+        $d = $this->model_admin->select_all('kereta');
+
+
+        $data['kereta'] = $d;
+
+        //var_dump($data);
+        $this->load->view('kereta', $data);
+    }
+
+    function tambah_kereta()
+    {
+        $data['kereta'] = $this->model_admin->select_all('stasiun');
+        $this->load->view('tambah_kereta', $data);
+    }
+
+    function proses_tambah_kereta()
+    {
+        $nama_kereta = $this->input->post('nama_kereta');
+        $kelas = $this->input->post('kelas');
+        $id_berangkat = $this->input->post('berangkat');
+        $id_tujuan = $this->input->post('tujuan');
+        $tarif = $this->input->post('tarif');
+        $arah = 'barat';
+
+
+
+        //cari arah
+        $stasiun1 = $this->model_admin->select_data('stasiun', array('no_stasiun' => $id_berangkat));
+        $berangkat = $stasiun1[0]->nama_stasiun;
+        //var_dump($berangkat);
+        $stasiun2 = $this->model_admin->select_data('stasiun', array('no_stasiun' => $id_tujuan));
+        $tujuan = $stasiun1[0]->nama_stasiun;
+        //var_dump($berangkat);
+        if (($stasiun2[0]->no_stasiun - $stasiun1[0]->no_stasiun) > 0) {
+            $arah = 'timur';
+        }
+        //var_dump($arah);
+
+        //hitung jml_stasiun
+
+        $jml_stasiun = $stasiun2[0]->no_stasiun - $stasiun1[0]->no_stasiun + 1;
+        if ($jml_stasiun < 0) {
+            $jml_stasiun *= -1;
+        }
+        //var_dump($jml_stasiun);
+
+
+        $data = array(
+            'nama_kereta' => $nama_kereta,
+            'kelas' => $kelas,
+            'berangkat' => $berangkat,
+            'tujuan' => $tujuan,
+            'tarif_normal' => $tarif,
+            'arah' => $arah,
+            'jml_stasiun' => $jml_stasiun
+        );
+        $this->model_admin->insert_data('kereta', $data);
+        print_r('Data Berhasil Ditambahkan');
+        $this->kereta();
+    }
+
+    function ubah_kereta()
+    {
+        $id_kereta = $this->uri->segment('3');
+        $where = array('id_kereta' => $id_kereta);
+
+
+
+
+
+
+
+        $data['kereta'] = $this->model_admin->select_data('kereta', $where);
+        $data['stasiun'] = $this->model_admin->select_all('stasiun');
+
+        //var_dump($data);
+        $this->load->view('ubah_kereta', $data);
+    }
+
+    function proses_ubah_kereta()
+    {
+        $id_kereta = $this->input->post('id_kereta');
+        $nama_kereta = $this->input->post('nama_kereta');
+        $kelas = $this->input->post('kelas');
+        $id_berangkat = $this->input->post('berangkat');
+        $id_tujuan = $this->input->post('tujuan');
+        $tarif = $this->input->post('tarif');
+        $arah = 'barat';
+
+
+
+        //cari arah
+        $stasiun1 = $this->model_admin->select_data('stasiun', array('no_stasiun' => $id_berangkat));
+        $berangkat = $stasiun1[0]->nama_stasiun;
+        //var_dump($berangkat);
+        $stasiun2 = $this->model_admin->select_data('stasiun', array('no_stasiun' => $id_tujuan));
+        $tujuan = $stasiun1[0]->nama_stasiun;
+        //var_dump($berangkat);
+        if (($stasiun2[0]->no_stasiun - $stasiun1[0]->no_stasiun) > 0) {
+            $arah = 'timur';
+        }
+        //var_dump($arah);
+
+        //hitung jml_stasiun
+
+        $jml_stasiun = $stasiun2[0]->no_stasiun - $stasiun1[0]->no_stasiun + 1;
+        if ($jml_stasiun < 0) {
+            $jml_stasiun *= -1;
+        }
+        //var_dump($jml_stasiun);
+
+
+
+        $data = array(
+            'nama_kereta' => $nama_kereta,
+            'kelas' => $kelas,
+            'berangkat' => $berangkat,
+            'tujuan' => $tujuan,
+            'tarif_normal' => $tarif,
+            'arah' => $arah,
+            'jml_stasiun' => $jml_stasiun
+        );
+
+        $this->model_admin->update_kereta('kereta', $data, $id_kereta);
+        print_r('berhasil ubah data');
+        $this->kereta();
+    }
+
+    function hapus_kereta()
+    {
+        $id = $this->uri->segment('3');
+        //var_dump($id);
+        $where = array('id_kereta' => $id);
+        $this->model_admin->delete_data('kereta', $where);
+
+
+        print_r('berhasil menghapus');
+        $this->kereta();
+    }
+
+
+
+
+    function pemberhentian()
+    {
+        $d = $this->model_admin->tampil_pemberhentian();
+
+
+        $data['data'] = $d;
+
+        //var_dump($data);
+        $this->load->view('pemberhentian', $data);
+    }
+
+    function tambah_pemberhentian()
+    {
+        $data['stasiun'] = $this->model_admin->select_all('stasiun');
+        $data['kereta'] = $this->model_admin->select_all('kereta');
+
+        $this->load->view('tambah_pemberhentian', $data);
+    }
+
+    function proses_tambah_pemberhentian()
+    {
+        $id_kereta = $this->input->post('kereta');
+        $no_stasiun = $this->input->post('stasiun');
+        $waktu = $this->input->post('waktu');
+
+
+
+
+
+
+        $data = array(
+            'id_kereta' => $id_kereta,
+            'no_stasiun' => $no_stasiun,
+            'waktu' => $waktu,
+
+        );
+        $this->model_admin->insert_data('pemberhentian', $data);
+        print_r('Data Berhasil Ditambahkan');
+        $this->pemberhentian();
+    }
+
+    function ubah_pemberhentian()
+    {
+        $id_pemberhentian = $this->uri->segment('3');
+        $where = array('id_pemberhentian' => $id_pemberhentian);
+
+
+
+
+
+
+
+        $data['pemberhentian'] = $this->model_admin->select_data('pemberhentian', $where);
+        $data['stasiun'] = $this->model_admin->select_all('stasiun');
+        $data['kereta'] = $this->model_admin->select_all('kereta');
+
+        //var_dump($data);
+        $this->load->view('ubah_pemberhentian', $data);
+    }
+
+    function proses_ubah_pemberhentian()
+    {
+        $id_kereta = $this->input->post('kereta');
+        $id_pemberhentian = $this->input->post('id_pemberhentian');
+        $no_stasiun = $this->input->post('stasiun');
+        $waktu = $this->input->post('waktu');
+
+
+
+
+
+
+        $data = array(
+            'id_kereta' => $id_kereta,
+            'no_stasiun' => $no_stasiun,
+            'waktu' => $waktu,
+
+        );
+
+        $this->model_admin->update_pemberhentian('pemberhentian', $data, $id_pemberhentian);
+        print_r('berhasil ubah data');
+        $this->pemberhentian();
+    }
+
+    function hapus_pemberhentian()
+    {
+        $id = $this->uri->segment('3');
+        //var_dump($id);
+        $where = array('id_pemberhentian' => $id);
+        $this->model_admin->delete_data('pemberhentian', $where);
+
+
+        print_r('berhasil menghapus');
+        $this->pemberhentian();
     }
 }

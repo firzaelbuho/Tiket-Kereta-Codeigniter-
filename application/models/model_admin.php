@@ -47,6 +47,16 @@ class Model_admin extends CI_Model
 
         return $this->db->get()->result();
     }
+    function tampil_pemberhentian()
+    {
+        $this->db->select('*');
+        $this->db->from('pemberhentian');
+        $this->db->join('kereta', 'pemberhentian.id_kereta=kereta.id_kereta');
+        $this->db->join('stasiun', 'pemberhentian.no_stasiun=stasiun.no_stasiun');
+
+
+        return $this->db->get()->result();
+    }
     function tampil_kereta()
     {
         $this->db->select('*');
@@ -82,6 +92,10 @@ class Model_admin extends CI_Model
     {
         $this->db->insert($table, $data);
     }
+    function select_all($table)
+    {
+        return $this->db->get($table)->result();
+    }
     function select_data($table, $data)
     {
         return $this->db->get_where($table, $data)->result();
@@ -90,6 +104,18 @@ class Model_admin extends CI_Model
     {
         $this->db->set($data);
         $this->db->where('id_jadwal', $id);
+        $this->db->update($table);
+    }
+    function update_kereta($table, $data, $id)
+    {
+        $this->db->set($data);
+        $this->db->where('id_kereta', $id);
+        $this->db->update($table);
+    }
+    function update_pemberhentian($table, $data, $id)
+    {
+        $this->db->set($data);
+        $this->db->where('id_pemberhentian', $id);
         $this->db->update($table);
     }
     function delete_data($table, $where)

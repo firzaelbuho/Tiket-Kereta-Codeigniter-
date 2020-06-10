@@ -28,6 +28,7 @@ class customer extends CI_Controller
     {
         $berangkat = $this->input->post('berangkat');
         $tujuan = $this->input->post('tujuan');
+        $tanggal = $this->input->post('tanggal');
 
         //cari arah kereta
         $perjalanan = $tujuan - $berangkat;
@@ -92,6 +93,7 @@ class customer extends CI_Controller
                 'id_kereta' => $temp_kereta2[$i],
                 'arah' => $arah,
 
+
             ))->num_rows();
             if ($cek3 > 0) {
 
@@ -103,7 +105,7 @@ class customer extends CI_Controller
         //output pilihan kereta
 
 
-        $hasil_kereta['data'] =   $this->model_customer->tampilJadwal($kereta);
+        $hasil_kereta['data'] =   $this->model_customer->tampilJadwal($kereta, $tanggal);
         $hasil_berangkat =  $this->model_customer->tampilPemberhentian($kereta, $berangkat);
         $hasil_tujuan =  $this->model_customer->tampilPemberhentian($kereta, $tujuan);
 
@@ -137,10 +139,29 @@ class customer extends CI_Controller
         // echo 'aaa';
         // echo $id_kereta;
 
-        $kursi['data'] = $this->model_customer->tampilKursi($id_jadwal, 1);
+        $kursi['data'] = $this->model_customer->tampilKursi($id_jadwal);
 
         // var_dump($cek);
 
         $this->load->view('beli_tiket', $kursi);
+    }
+    function proses_tiket()
+    {
+        $id = $this->input->post('id');
+
+        $nama = $this->input->post('nama');
+
+        $kursi = $this->input->post('kursi');
+        // echo 'aaa';
+        // echo $id_kereta;
+
+
+        var_dump($kursi);
+
+        var_dump($nama);
+
+        var_dump($id);
+
+        //$this->load->view('buat_transaksi', $tiket);
     }
 }

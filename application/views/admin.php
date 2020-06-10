@@ -7,19 +7,41 @@
 
 <body>
     <br><br><br>
-    <div class="container centered">
+    <div class="container centere">
 
-        <div class="row ">
-            <div class="col-2"></div>
-            <div class="col-4 bg-primary m-1">
-                <a class="text-decoration-none btn text-light" href="<?php echo base_url('admin/Laporan'); ?>">Laporan</a>
+        <div class="row centered">
+            <div class="col-5 bg-primary m-1">
+
+                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/jadwal'); ?>">Jadwal</a>
+
             </div>
-            <div class="col-4 bg-primary m-1">
-                <a class="text-decoration-none btn text-light" href="<?php echo base_url('admin/Penjadwalan'); ?>">Penjadwalan</a>
+
+            <div class="col-5 bg-primary m-1">
+
+                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/kereta'); ?>">Kereta</a>
+
             </div>
+
 
 
         </div>
+        <div class="row centered">
+            <div class="col-5 bg-primary m-1">
+
+                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/pemberhentian'); ?>">Pemberhentian</a>
+
+            </div>
+
+            <div class="col-5 bg-primary m-1">
+
+                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/Laporan'); ?>">Laporan</a>
+
+            </div>
+
+
+
+        </div>
+
 
     </div>
 

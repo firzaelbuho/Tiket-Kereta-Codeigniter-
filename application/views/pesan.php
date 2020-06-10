@@ -6,8 +6,11 @@
 </head>
 
 <body class="bg-primary">
-    <h1>Login berhasil !</h1>
-    <h2>Hai, <?php echo $this->session->userdata("nama"); ?></h2>
+
+    <?php
+    //echo $this->session->userdata("nama"); 
+    ?>
+
     <a href="<?php echo base_url('login/logout'); ?>">Logout</a>
     <br><br>
 
@@ -34,6 +37,10 @@
                     <option value="<?php echo $u->no_stasiun ?>"><?php echo $u->nama_stasiun ?></option>
                 <?php } ?>
             </select>
+            <br>
+
+            <p>Tanggal Keberangkatan</p>
+            <input name="tanggal" type="date" class="form-control">
             <br>
 
             <br>

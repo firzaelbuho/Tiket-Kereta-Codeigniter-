@@ -34,15 +34,22 @@ class Model_customer extends CI_Model
         $this->db->empty_table($table);
     }
 
-    function tampilJadwal($kereta)
+    function tampilJadwal($kereta, $tanggal)
     {
         $this->db->select('*');
         $this->db->from('jadwal');
         $this->db->join('kereta', 'jadwal.id_kereta=kereta.id_kereta');
 
-        for ($i = 0; $i < count($kereta); $i++) {
-            $this->db->or_where('jadwal.id_kereta ', $kereta[$i]);
+        $i = 0;
+        $query = '(jadwal.id_kereta=' . $kereta[0];
+        for ($i = 1; $i < count($kereta); $i++) {
+            $query = $query . ' OR jadwal.id_kereta=' . $kereta[$i];
         }
+        $query = $query . ')';
+
+        $this->db->where('jadwal.tanggal', $tanggal);
+        $this->db->where($query);
+
 
         return  $this->db->get()->result();
     }
@@ -71,12 +78,12 @@ class Model_customer extends CI_Model
     }
 
 
-    function tampilKursi($id_jadwal, $gerbong)
+    function tampilKursi($id_jadwal)
     {
         $this->db->select('*');
         $this->db->from('kursi');
         $this->db->where('id_jadwal', $id_jadwal);
-        $this->db->where('no_gerbong', $gerbong);
+
         return  $this->db->get()->result();
     }
 

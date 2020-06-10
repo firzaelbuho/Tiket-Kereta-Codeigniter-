@@ -7,6 +7,35 @@
 
 <body class="bg-primary">
 
+
+    <?php
+
+    // var_dump($data);
+    function tampil_kursi($id, $data)
+    { ?>
+        <div class="col-1">
+            <?php
+            if ($data[$id]->status == 'kosong') { ?>
+
+                <input name="kursi" type="radio" value="<?= $data[$id]->id_kursi ?>">
+            <?php } else {
+            ?>
+
+                <input name="kursi" disabled type="radio" value="<?= $data[$id]->no_kursi ?>">
+            <?php
+
+            }
+            echo $data[$id]->no_kursi;
+
+            ?>
+
+        </div>
+
+
+
+    <?php }
+    ?>
+
     <div class="p-5 container bg-white">
         <div>
 
@@ -20,115 +49,80 @@
                     <tr>
                         <td>Nama Penumpang</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control "></td>
+                        <td><input name="nama" type="text" class="form-control "></td>
                     </tr>
                     <tr>
                         <td>No Identitas</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control "></td>
+                        <td><input name="id" type="text" class="form-control "></td>
                     </tr>
                 </table>
                 <br>
                 <h3>Pilih Tempat Duduk</h3>
                 <br>
                 <p>
-                    Gerbong
+
                     <select name="gerbong" id="gerbong">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
+                        <?php for ($i = 1; $i <= 8; $i++) { ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php } ?>
+
                     </select>
-                    No. Kursi <input size="2" disabled type="text">
-                </p>
-                <div id="pilihKursi">
+                    <p> Kursi</p>
 
+                    <p>Pilih gerbong</p>
+                    <br>
+                    <div class="row">
+                        <?php
+                        for ($i = 1; $i <= 8; $i++) { ?>
+
+                            <div class="btn-primary px-3 text-white bg-primary mx-1" id="<?= 'g' . $i ?>" class="col-1">
+                                <?= $i ?>
+                            </div>
+
+                            </a>
+
+                        <?php } ?>
+                    </div>
+                    <br>
                     <?php
-                    //var_dump($data);
-                    for ($i = 0; $i < count($data); $i++) {
-                    ?>
-                        <div style="width:70%" class="row text-center">
+
+                    for ($x = 0; $x < 8; $x++) {
+                        $id = 'gerbong' . ($x + 1) ?>
+                        <div id="<?= $id ?>" class="mabar">
+                            <p>Gerbong <?= $x + 1 ?></p>
                             <?php
-                            if ($data[$i]->status == 'kosong') { ?>
-                                <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-                                <?php
-                            } else if ($data[$i]->status == 'penuh') { ?>
-                                    <div class="m-1 p-1 col-lg-1 bg-danger text-white">
-                                    <?php } else { ?>
-                                        <div class="m-1 p-1 col-lg-1 bg-warning text-white">
-                                        <?php } ?>
+                            for ($i = $x * 80; $i < $x * 80 + 20; $i++) { ?>
+                                <br>
 
-                                        <?= $data[$i]->no_kursi ?>
-
-                                        </div>
-
-
-                                        <?php
-
-                                        if ($data[$i]->status == 'kosong') { ?>
-                                            <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-                                            <?php
-                                        } else if ($data[$i]->status == 'penuh') { ?>
-                                                <div class="m-1 p-1 col-lg-1 bg-danger text-white">
-                                                <?php } else { ?>
-                                                    <div class="m-1 p-1 col-lg-1 bg-warning text-white">
-                                                    <?php } ?>
-
-                                                    <?= $data[$i + 20]->no_kursi ?>
-
-                                                    </div>
-
-                                                    <div class="col-1"></div>
+                                <div class="row">
+                                    <?php
+                                    tampil_kursi($i, $data);
+                                    tampil_kursi($i + 20, $data);
+                                    tampil_kursi($i + 40, $data);
+                                    tampil_kursi($i + 60, $data);
+                                    ?>
+                                </div>
+                                <br>
 
 
-                                                    <?php
-                                                    if ($data[$i]->status == 'kosong') { ?>
-                                                        <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-                                                        <?php
-                                                    } else if ($data[$i]->status == 'penuh') { ?>
-                                                            <div class="m-1 p-1 col-lg-1 bg-danger text-white">
-                                                            <?php } else { ?>
-                                                                <div class="m-1 p-1 col-lg-1 bg-warning text-white">
-                                                                <?php } ?>
+                            <?php  }
+                            ?>
+                        </div>
+                    <?php
+                    } ?>
 
-                                                                <?= $data[$i + 40]->no_kursi ?>
-
-                                                                </div>
-
-
-                                                                <?php
-                                                                if ($data[$i]->status == 'kosong') { ?>
-                                                                    <div class="m-1 p-1 col-lg-1 bg-primary text-white">
-                                                                    <?php
-                                                                } else if ($data[$i]->status == 'penuh') { ?>
-                                                                        <div class="m-1 p-1 col-lg-1 bg-danger text-white">
-                                                                        <?php } else { ?>
-                                                                            <div class="m-1 p-1 col-lg-1 bg-warning text-white">
-                                                                            <?php } ?>
-
-                                                                            <?= $data[$i + 60]->no_kursi ?>
-
-                                                                            </div>
-
-                                                                        </div>
+                    <br>
 
 
 
 
 
 
-                                                                    <?php
-                                                                } ?>
 
 
-                                                                    </div>
-                                                                    <br>
 
-                                                                    <button type="submit" class="btn btn-primary">Pesan Tiket</button>
+                    <button type="submit" class="btn btn-primary">Pesan Tiket</button>
 
 
 
