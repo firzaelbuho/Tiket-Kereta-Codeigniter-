@@ -62,12 +62,7 @@
                 <br>
                 <p>
 
-                    <select name="gerbong" id="gerbong">
-                        <?php for ($i = 1; $i <= 8; $i++) { ?>
-                            <option value="<?= $i ?>"><?= $i ?></option>
-                        <?php } ?>
 
-                    </select>
                     <p> Kursi</p>
 
                     <p>Pilih gerbong</p>

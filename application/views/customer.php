@@ -7,10 +7,11 @@
 
 <body class="bg-primary text-white">
     <a href="<?php echo base_url('login/logout'); ?>">Logout</a>
-    <div class="container bg-white text-dark p-5 center justify-content-center">
+    <div class=" text-center container bg-white text-dark p-5 center justify-content-center">
         <br>
-        <h3>Login berhasil !</h3>
-        <h2>Hai, <?php echo $this->session->userdata("nama"); ?></h2>
+        <h3>Halaman Pelanggan</h3>
+
+
 
         <br><br>
         <div class="row">
@@ -18,17 +19,13 @@
 
             </div>
             <div class="col-4">
-                <div class="bg-primary p-2 center">
-                    <a class="text-white text-decoration-none" href="<?= base_url('customer/pesan') ?>">Pesan Tiket</a>
-                </div>
-                <br>
-                <div class="bg-primary p-2">
-                    <a class="text-white text-decoration-none" href="">Batalkan Tiket</a>
-                </div>
-                <br>
-                <div class="bg-primary p-2">
-                    <a class="text-white text-decoration-none" href="">Pesan Tiket</a>
-                </div>
+                <a class=" m-2 btn btn-primary text-white text-decoration-none" href="<?= base_url('customer/pesan') ?>">Pesan Tiket</>
+
+
+
+
+                    <a class="btn btn-primary text-white text-decoration-none" href="<?= base_url('customer/tiket_saya') ?>">Tiket Saya</a>
+
             </div>
         </div>
 

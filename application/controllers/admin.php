@@ -237,7 +237,7 @@ class Admin extends CI_Controller
         $berangkat = $stasiun1[0]->nama_stasiun;
         //var_dump($berangkat);
         $stasiun2 = $this->model_admin->select_data('stasiun', array('no_stasiun' => $id_tujuan));
-        $tujuan = $stasiun1[0]->nama_stasiun;
+        $tujuan = $stasiun2[0]->nama_stasiun;
         //var_dump($berangkat);
         if (($stasiun2[0]->no_stasiun - $stasiun1[0]->no_stasiun) > 0) {
             $arah = 'timur';

@@ -6,6 +6,7 @@ class Model_admin extends CI_Model
     {
         $this->db->select('id_transaksi, tgl_bayar,year(tgl_bayar) as tahun,month(tgl_bayar) as bulan,day(tgl_bayar) as tgl,count(id_transaksi) as jml_trx,sum(jml_bayar) as total_trx');
         $this->db->from('transaksi');
+        $this->db->where('status', 'dibayar');
         $this->db->group_by('tgl_bayar');
         return $this->db->get()->result();
     }

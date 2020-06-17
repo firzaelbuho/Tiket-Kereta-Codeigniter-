@@ -19,7 +19,7 @@
         //var_dump($data);
         foreach ($data as $u) {
         ?>
-            <a href="<?php echo base_url(); ?>customer/pilih_kereta/<?= $u->id_kereta; ?>">
+            <a href="<?php echo base_url(); ?>customer/pilih_kereta/<?= $u->id_jadwal; ?>/<?= $u->id_penumpang_berangkat; ?>/<?= $u->id_penumpang_tujuan; ?>">
                 <div class=" row text-white bg-primary p-3">
                     <div class="col-6">
                         <br>
