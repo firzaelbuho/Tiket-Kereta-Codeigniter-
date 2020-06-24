@@ -10,6 +10,7 @@
     <br> <br>
 
     <div class="container">
+        <a href="<?php echo base_url(); ?>admin" class="btn btn-primary"> <?= '<' ?> </a>
 
         <br>
         <div class="">

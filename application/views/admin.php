@@ -12,7 +12,7 @@
         <div class="row centered">
             <div class="col-5 bg-primary m-1">
 
-                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/jadwal'); ?>">Jadwal</a>
+                <a style="font-size: 28px;" class="text-decoration-none btn text-light" href="<?php echo base_url('admin/penjadwalan'); ?>">Jadwal</a>
 
             </div>
 

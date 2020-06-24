@@ -7,6 +7,8 @@ class Model_admin extends CI_Model
         $this->db->select('id_transaksi, tgl_bayar,year(tgl_bayar) as tahun,month(tgl_bayar) as bulan,day(tgl_bayar) as tgl,count(id_transaksi) as jml_trx,sum(jml_bayar) as total_trx');
         $this->db->from('transaksi');
         $this->db->where('status', 'dibayar');
+        $this->db->where('jml_bayar >', '0');
+
         $this->db->group_by('tgl_bayar');
         return $this->db->get()->result();
     }
@@ -36,6 +38,7 @@ class Model_admin extends CI_Model
         $this->db->from('transaksi');
         $this->db->join('akun', 'akun.id=transaksi.id_pemesan');
         $this->db->where('tgl_bayar', $id);
+        $this->db->where('jml_bayar >', '0');
         return $this->db->get()->result();
     }
 
